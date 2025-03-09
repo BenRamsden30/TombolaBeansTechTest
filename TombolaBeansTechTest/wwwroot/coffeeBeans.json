@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Ethiopian Yirgacheffe",
+    "origin": "Ethiopia",
+    "roastType": "Light",
+    "description": "Floral aroma with bright acidity and hints of citrus and berries.",
+    "price": 12.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 2,
+    "name": "Colombian Supremo",
+    "origin": "Colombia",
+    "roastType": "Medium",
+    "description": "Smooth body with balanced acidity, caramel sweetness, and nutty undertones.",
+    "price": 10.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 3,
+    "name": "Sumatra Mandheling",
+    "origin": "Indonesia",
+    "roastType": "Dark",
+    "description": "Rich, earthy flavors with low acidity and a hint of chocolate.",
+    "price": 13.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 4,
+    "name": "Guatemalan Antigua",
+    "origin": "Guatemala",
+    "roastType": "Medium",
+    "description": "Complex, full-bodied coffee with notes of chocolate and spice.",
+    "price": 11.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 5,
+    "name": "Kenyan AA",
+    "origin": "Kenya",
+    "roastType": "Light-Medium",
+    "description": "Bright acidity, juicy berry flavors, and a wine-like finish.",
+    "price": 14.49,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 6,
+    "name": "Brazil Santos",
+    "origin": "Brazil",
+    "roastType": "Medium",
+    "description": "Mild, nutty flavor with low acidity and a smooth finish.",
+    "price": 9.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 7,
+    "name": "Jamaican Blue Mountain",
+    "origin": "Jamaica",
+    "roastType": "Medium",
+    "description": "Smooth, mild flavor with bright acidity and hints of nuts and chocolate.",
+    "price": 29.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 8,
+    "name": "Costa Rican Tarrazu",
+    "origin": "Costa Rica",
+    "roastType": "Medium",
+    "description": "Bright acidity, smooth body, and notes of citrus and honey.",
+    "price": 13.49,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 9,
+    "name": "Hawaiian Kona",
+    "origin": "Hawaii, USA",
+    "roastType": "Medium",
+    "description": "Delicate, fruity aroma with a smooth, rich body and hints of chocolate.",
+    "price": 32.99,
+    "isBeanOfTheDay": false
+  },
+  {
+    "id": 10,
+    "name": "Mexican Chiapas",
+    "origin": "Mexico",
+    "roastType": "Light",
+    "description": "Mild, sweet flavors with bright acidity and a clean finish.",
+    "price": 11.49,
+    "isBeanOfTheDay": false
+  }
+]
