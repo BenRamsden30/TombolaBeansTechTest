@@ -1,10 +1,12 @@
 @page "/order"
-@using TombolaBeansTechTest.Pages
+
 @using TombolaBeansTechTest.Services
 @inject CoffeBeanService coffeBeanService
+@inject NavigationManager navigationManager
+
 
 <h3>Order Coffee Beans</h3>
-<select @bind="selectedBeanId" class="form-control mb-3">
+<select class="form-control mb-3" @bind=selectedBeanId>
     <option value="">Select a Coffee Bean</option>
     @foreach (var bean in coffeBeanService.GetAllBeans())
     {
@@ -13,7 +15,7 @@
 </select>
 
 <input @bind="quantity" type="number" placeholder="Quantity" class="form-control mb-3" />
-<button class="btn btn-success" @onclick="SubmitOrder">Place Order</button>
+<button class="btn btn-primary" @onclick="SubmitOrder">Submit Order</button>
 
 @code {
     private int selectedBeanId;
@@ -23,6 +25,7 @@
     {
         if (selectedBeanId > 0 && quantity > 0)
         {
+            navigationManager.NavigateTo("/");
             Console.WriteLine($"Order placed: {quantity} units of Bean ID {selectedBeanId}");
         }
     }

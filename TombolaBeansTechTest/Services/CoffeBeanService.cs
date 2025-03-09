@@ -1,5 +1,7 @@
 using System.Text.Json;
 using TombolaBeansTechTest.Models;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace TombolaBeansTechTest.Services
 {
@@ -26,14 +28,40 @@ namespace TombolaBeansTechTest.Services
                     Console.WriteLine($"Error: File not found at {filePath}");
                     return;
                 }
-
-                string json = await File.ReadAllTextAsync(filePath);
+                Console.WriteLine("Reading file: " + filePath);
+                string json = LoadJsonAsync(filePath).Result;
+                Console.WriteLine("Loading coffee beans.json");
                 _beans = JsonSerializer.Deserialize<List<CoffeBeans>>(json,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<CoffeBeans>();
+                Console.WriteLine($"Loaded {_beans.Count} coffee beans.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading JSON: {ex.Message}");
+            }
+        }
+        
+        public async Task<string> LoadJsonAsync(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"Error: File not found at {filePath}");
+                return string.Empty;
+            }
+
+            try
+            {
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var sr = new StreamReader(fs))
+                {
+                    return sr.ReadToEnd();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading file: {ex.Message}");
+                return string.Empty;
             }
         }
 

@@ -2,18 +2,25 @@
 @using TombolaBeansTechTest.Models
 @using TombolaBeansTechTest.Services
 @inject CoffeBeanService BeanService
+@inject NavigationManager navigationManager
 
 <h3>@Bean?.Name</h3>
 <p><strong>Origin:</strong> @Bean?.Origin</p>
 <p><strong>Roast:</strong> @Bean?.RoastType</p>
 <p>@Bean?.Description</p>
 <p><strong>Price:</strong> $@Bean?.Price</p>
-<button class="btn btn-success">Order Now</button>
+<button type="button" @onclick="() => onClick()" class="btn btn-success">Order Now</button>
 
 @code {
     [Parameter] public int Id { get; set; }
     private CoffeBeans Bean;
 
+    private void onClick()
+    {
+        Console.WriteLine("Order Placed.");
+        navigationManager.NavigateTo("/");
+    }
+    
     protected override void OnInitialized()
     {
         Bean = BeanService.GetBeanById(Id);
