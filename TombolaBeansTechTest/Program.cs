@@ -1,30 +1,27 @@
-using Tombola_Beans_Tech_Test.Components;
-using TombolaBeansTechTest.Models;
 using TombolaBeansTechTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+// ✅ Add services to the dependency injection container
+builder.Services.AddRazorPages();  // Enables Razor Pages
+builder.Services.AddServerSideBlazor();  // Enables Blazor Server
+builder.Services.AddSingleton<CoffeeBeanService>(); // Inject CoffeeBeanService
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ✅ Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
+// ✅ Serve static files (needed for loading JSON from wwwroot)
 app.UseStaticFiles();
-app.UseAntiforgery();
 
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.UseRouting();
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host"); // Routes to Blazor UI
 
 app.Run();
-builder.Services.AddSingleton<CoffeeBeanService>();
