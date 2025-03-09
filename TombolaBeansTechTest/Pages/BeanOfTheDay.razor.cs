@@ -4,7 +4,7 @@ using TombolaBeansTechTest.Services;
 
 namespace TombolaBeansTechTest.Pages
 {
-    public partial class BeanOfTheDay
+    public partial class BeanOfTheDay : ComponentBase
     {
         // Injecting the CoffeeBeansService
         [Inject] private CoffeBeanService CoffeeBeansService { get; set; }
