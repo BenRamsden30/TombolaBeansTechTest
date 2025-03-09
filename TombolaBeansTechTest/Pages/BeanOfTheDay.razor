@@ -12,7 +12,7 @@
         <p><strong>Price:</strong> @selectedBean.Price.ToString("C")</p>
 
         <!-- Button for more details -->
-        <button @onclick="ShowMoreDetails">More Info</button>
+        <a href="/CoffeBeans/@selectedBean.Id" class="btn btn-primary">View Details</a>
     </div>
 }
 else
