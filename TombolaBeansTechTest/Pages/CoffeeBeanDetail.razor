@@ -1,0 +1,21 @@
+@page "/CoffeBeans/{id:int}"
+@using TombolaBeansTechTest.Models
+@using TombolaBeansTechTest.Services
+@inject CoffeeBeanService BeanService
+
+<h3>@Bean?.Name</h3>
+<p><strong>Origin:</strong> @Bean?.Origin</p>
+<p><strong>Roast:</strong> @Bean?.RoastType</p>
+<p>@Bean?.Description</p>
+<p><strong>Price:</strong> $@Bean?.Price</p>
+<button class="btn btn-success">Order Now</button>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private CoffeBeans Bean;
+
+    protected override void OnInitialized()
+    {
+        Bean = BeanService.GetBeanById(Id);
+    }
+}

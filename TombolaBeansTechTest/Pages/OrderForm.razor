@@ -1,0 +1,28 @@
+@page "/order"
+@using TombolaBeansTechTest.Services
+@inject CoffeeBeanService BeanService
+
+<h3>Order Coffee Beans</h3>
+<select @bind="selectedBeanId" class="form-control mb-3">
+    <option value="">Select a Coffee Bean</option>
+    @foreach (var bean in BeanService.GetAllBeans())
+    {
+        <option value="@bean.Id">@bean.Name</option>
+    }
+</select>
+
+<input @bind="quantity" type="number" placeholder="Quantity" class="form-control mb-3" />
+<button class="btn btn-success" @onclick="SubmitOrder">Place Order</button>
+
+@code {
+    private int selectedBeanId;
+    private int quantity = 1;
+
+    private void SubmitOrder()
+    {
+        if (selectedBeanId > 0 && quantity > 0)
+        {
+            Console.WriteLine($"Order placed: {quantity} units of Bean ID {selectedBeanId}");
+        }
+    }
+}

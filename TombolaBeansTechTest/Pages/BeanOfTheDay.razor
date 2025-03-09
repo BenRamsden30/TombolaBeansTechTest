@@ -1,0 +1,23 @@
+@page "/bean-of-the-day"
+@using TombolaBeansTechTest.Models
+@using TombolaBeansTechTest.Services
+@inject CoffeeBeanService BeanService
+
+<h3>Bean of the Day</h3>
+@if (Bean != null)
+{
+    <div class="card p-3">
+        <h5>@Bean.Name</h5>
+        <p>@Bean.Description</p>
+        <a href="/bean/@Bean.Id" class="btn btn-primary">Learn More</a>
+    </div>
+}
+
+@code {
+    private CoffeBeans Bean;
+
+    protected override void OnInitialized()
+    {
+        Bean = BeanService.GetBeanOfTheDay();
+    }
+}
