@@ -6,7 +6,7 @@
 
 
 <h3>Order Coffee Beans</h3>
-<select class="form-control mb-3" @bind=selectedBeanId>
+<select @bind="selectedBeanId" class="form-control mb-3">
     <option value="">Select a Coffee Bean</option>
     @foreach (var bean in coffeBeanService.GetAllBeans())
     {
@@ -18,12 +18,12 @@
 <button class="btn btn-primary" @onclick="SubmitOrder">Submit Order</button>
 
 @code {
-    private int selectedBeanId;
+    private string selectedBeanId;
     private int quantity = 1;
 
     private void SubmitOrder()
     {
-        if (selectedBeanId > 0 && quantity > 0)
+        if (selectedBeanId != "0" && quantity > 0)
         {
             navigationManager.NavigateTo("/");
             Console.WriteLine($"Order placed: {quantity} units of Bean ID {selectedBeanId}");

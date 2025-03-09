@@ -32,7 +32,7 @@ else
     [Inject] private NavigationManager NavigationManager { get; set; }
 
     // This method is invoked when the component is initialized
-    protected void OnInitialized()
+    protected override void OnInitialized()
     {
         // Get the random "Bean of the Day" and ensure it's not the same as the previous day
         selectedBean = GetBeanOfTheDay();
