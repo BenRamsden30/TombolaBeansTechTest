@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using TombolaBeansTechTest.Models;
-using TombolaBeansTechTest.Services; // Ensure that your CoffeeBeansService is correctly imported
+using TombolaBeansTechTest.Services;
 
-namespace AllTheBeans.Pages
+namespace TombolaBeansTechTest.Pages
 {
     public partial class BeanOfTheDay
     {

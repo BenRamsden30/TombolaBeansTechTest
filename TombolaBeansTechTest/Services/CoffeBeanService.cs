@@ -6,7 +6,7 @@ namespace TombolaBeansTechTest.Services
     public class CoffeBeanService
     {
         private readonly IWebHostEnvironment _env;
-        private static List<CoffeBeans> _beans = new();
+        private List<CoffeBeans> _beans = new();
 
         public CoffeBeanService(IWebHostEnvironment env)
         {
@@ -37,10 +37,10 @@ namespace TombolaBeansTechTest.Services
             }
         }
 
-        public static List<CoffeBeans> GetAllBeans() => _beans;
-        public static CoffeBeans GetBeanById(int id) => _beans.FirstOrDefault(b => b.Id == id);
+        public List<CoffeBeans> GetAllBeans() => _beans;
+        public CoffeBeans GetBeanById(int id) => _beans.FirstOrDefault(b => b.Id == id);
 
-        public static CoffeBeans GetBeanOfTheDay()
+        public CoffeBeans GetBeanOfTheDay()
         {
             var random = new Random();
             return _beans.Count > 0 ? _beans[random.Next(_beans.Count)] : null;

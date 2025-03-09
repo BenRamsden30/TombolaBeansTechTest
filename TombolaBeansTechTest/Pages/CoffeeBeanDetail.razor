@@ -1,7 +1,8 @@
 @page "/CoffeBeans/{id:int}"
 @using TombolaBeansTechTest.Models
 @using TombolaBeansTechTest.Pages
-@inject CoffeeBeanService BeanService
+@using TombolaBeansTechTest.Services
+@inject CoffeBeanService BeanService
 
 <h3>@Bean?.Name</h3>
 <p><strong>Origin:</strong> @Bean?.Origin</p>
