@@ -1,11 +1,11 @@
 @page "/order"
 @using TombolaBeansTechTest.Pages
-@inject CoffeeBeanService BeanService
+@using TombolaBeansTechTest.Services
 
 <h3>Order Coffee Beans</h3>
 <select @bind="selectedBeanId" class="form-control mb-3">
     <option value="">Select a Coffee Bean</option>
-    @foreach (var bean in BeanService.GetAllBeans())
+    @foreach (var bean in CoffeBeanService.GetAllBeans())
     {
         <option value="@bean.Id">@bean.Name</option>
     }

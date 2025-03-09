@@ -8,5 +8,6 @@ public class CoffeBeans
     public string RoastType { get; set; }
     public string Description { get; set; }
     public double Price { get; set; }
+    
     public bool IsBeanOfTheDay { get; set; }
 }

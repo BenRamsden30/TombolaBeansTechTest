@@ -1,42 +1,44 @@
 using Microsoft.AspNetCore.Components;
 using TombolaBeansTechTest.Models;
+using TombolaBeansTechTest.Services; // Ensure that your CoffeeBeansService is correctly imported
 
-namespace TombolaBeansTechTest.Pages;
-
-using System.Text.Json;
-
-public class CoffeeBeanService
+namespace AllTheBeans.Pages
 {
-    private List<CoffeBeans> _beans;
-    private static int _lastBeanId = -1; // Stores last selected bean ID
-
-    public CoffeeBeanService()
+    public partial class BeanOfTheDay
     {
-        string json = File.ReadAllText("wwwroot/data/coffeeBeans.json");
-        _beans = JsonSerializer.Deserialize<List<CoffeBeans>>(json);
-    }
+        // Injecting the CoffeeBeansService
+        [Inject] private CoffeBeanService CoffeeBeansService { get; set; }
 
-    public List<CoffeBeans> GetAllBeans() => _beans;
+        // Injecting the NavigationManager for navigation
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
-    public CoffeBeans GetBeanById(int id) => _beans.FirstOrDefault(b => b.Id == id);
+        // The selected CoffeeBean for the "Bean of the Day"
+        private CoffeBeans selectedBean;
 
-    public CoffeBeans GetBeanOfTheDay()
-    {
-        if (_beans == null || _beans.Count == 0)
-            return null;
-
-        var random = new Random();
-        CoffeBeans selectedBean;
-
-        // Ensure the new bean is different from the last one
-        do
+        // This method is invoked when the component is initialized
+        protected void OnInitialized()
         {
-            selectedBean = _beans[random.Next(_beans.Count)];
-        } while (selectedBean.Id == _lastBeanId);
+            // Get the random "Bean of the Day" and ensure it's not the same as the previous day
+            selectedBean = GetBeanOfTheDay();
+        }
 
-        // Store the selected bean ID
-        _lastBeanId = selectedBean.Id;
+        // Function to get the "Bean of the Day"
+        private CoffeBeans GetBeanOfTheDay()
+        {
+            var beans = CoffeeBeansService.GetAllBeans(); // Get the list of beans
+            var random = new Random();
 
-        return selectedBean;
+            // Select a random coffee bean
+            var todaysBean = beans[random.Next(beans.Count)];
+
+            return todaysBean;
+        }
+
+        // Handler to navigate to more details about the current Bean of the Day
+        private void ShowMoreDetails()
+        {
+            // Navigate to a page showing more details of the current coffee bean
+            NavigationManager.NavigateTo($"/coffeebean/{selectedBean.Name}");
+        }
     }
 }

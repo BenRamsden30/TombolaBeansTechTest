@@ -1,44 +1,49 @@
 using System.Text.Json;
 using TombolaBeansTechTest.Models;
 
-public class CoffeBeanService
+namespace TombolaBeansTechTest.Services
 {
-    private readonly IWebHostEnvironment _env;
-    private List<CoffeBeans> _beans = new();
-
-    public CoffeBeanService(IWebHostEnvironment env)
+    public class CoffeBeanService
     {
-        _env = env;
-        LoadBeansFromJson().Wait(); // Load data on startup
-    }
+        private readonly IWebHostEnvironment _env;
+        private static List<CoffeBeans> _beans = new();
 
-    private async Task LoadBeansFromJson()
-    {
-        try
+        public CoffeBeanService(IWebHostEnvironment env)
         {
-            // Ensure correct file path
-            string filePath = Path.Combine(_env.WebRootPath, "data", "coffeeBeans.json");
+            _env = env;
+            LoadBeansFromJson().Wait(); // Load data on startup
+        }
 
-            if (!File.Exists(filePath))
+        private async Task LoadBeansFromJson()
+        {
+            try
             {
-                Console.WriteLine($"Error: File not found at {filePath}");
-                return;
+                // Ensure correct file path
+                string filePath = Path.Combine(_env.WebRootPath, "data", "coffeeBeans.json");
+
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"Error: File not found at {filePath}");
+                    return;
+                }
+
+                string json = await File.ReadAllTextAsync(filePath);
+                _beans = JsonSerializer.Deserialize<List<CoffeBeans>>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<CoffeBeans>();
             }
-
-            string json = await File.ReadAllTextAsync(filePath);
-            _beans = JsonSerializer.Deserialize<List<CoffeBeans>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<CoffeBeans>();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading JSON: {ex.Message}");
+            }
         }
-        catch (Exception ex)
+
+        public static List<CoffeBeans> GetAllBeans() => _beans;
+        public static CoffeBeans GetBeanById(int id) => _beans.FirstOrDefault(b => b.Id == id);
+
+        public static CoffeBeans GetBeanOfTheDay()
         {
-            Console.WriteLine($"Error loading JSON: {ex.Message}");
+            var random = new Random();
+            return _beans.Count > 0 ? _beans[random.Next(_beans.Count)] : null;
         }
-    }
-
-    public List<CoffeBeans> GetAllBeans() => _beans;
-    public CoffeBeans GetBeanById(int id) => _beans.FirstOrDefault(b => b.Id == id);
-    public CoffeBeans GetBeanOfTheDay()
-    {
-        var random = new Random();
-        return _beans.Count > 0 ? _beans[random.Next(_beans.Count)] : null;
     }
 }

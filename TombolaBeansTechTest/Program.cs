@@ -1,4 +1,5 @@
 using TombolaBeansTechTest.Pages;
+using TombolaBeansTechTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 // Register CoffeeBeanService
-builder.Services.AddSingleton<CoffeeBeanService>();
+builder.Services.AddSingleton<CoffeBeanService>();
 
 var app = builder.Build();
 
