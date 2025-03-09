@@ -1,0 +1,31 @@
+@page "/"
+@using Microsoft.AspNetCore.Components
+
+<h3>Welcome to All The Beans!</h3>
+<p>Your go-to coffee shop for all your coffee bean needs.</p>
+
+<div class="buttons">
+    <button class="btn btn-primary" @onclick="NavigateToCoffeeBeans">View Coffee Beans</button>
+    <button class="btn btn-primary" @onclick="NavigateToOrderForm">Place an Order</button>
+    <button class="btn btn-primary" @onclick="NavigateToBeanOfTheDay">Bean of the Day</button>
+</div>
+
+@code {
+    private void NavigateToCoffeeBeans()
+    {
+        NavigationManager.NavigateTo("/CoffeBeans");
+    }
+
+    private void NavigateToOrderForm()
+    {
+        NavigationManager.NavigateTo("/order");
+    }
+
+    private void NavigateToBeanOfTheDay()
+    {
+        NavigationManager.NavigateTo("/bean-of-the-day");
+    }
+    
+
+    [Inject] private NavigationManager NavigationManager { get; set; }
+}
