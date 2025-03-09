@@ -1,6 +1,5 @@
 @page "/beanoftheday"
 
-
 <h3>Bean of the Day</h3>
 
 @if (@selectedBean != null)
@@ -9,7 +8,7 @@
         <h4>@selectedBean.Name</h4>
         <p>@selectedBean.Description</p>
         <p><strong>Price:</strong> @selectedBean.Price.ToString("C")</p>
-        <img src="@selectedBean.ImageUrl" alt="Coffee Bean" class="bean-image" />
+        <img src="@selectedBean.ImageUrl" alt="Coffee Bean" class="bean-image"/>
 
         <!-- Button for more details -->
         <button @onclick="ShowMoreDetails">More Info</button>
